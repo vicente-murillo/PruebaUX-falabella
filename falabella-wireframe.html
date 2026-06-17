@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1100">
+  <title>Banco Falabella — Wireframe UX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #000;
+      background: #fff;
+      min-width: 1100px;
+      padding-top: 36px;
+    }
+
+    /* ── Presentation bar ── */
+    .pres-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 36px;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      z-index: 1000;
+    }
+    .pres-bar button {
+      background: none;
+      border: none;
+      color: #888;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      padding: 8px 20px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+    .pres-bar button.active {
+      color: #fff;
+      font-weight: 700;
+      border-bottom-color: #fff;
+    }
+
+    /* ── Screens ── */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── Global header — 160px total (producción) ── */
+    .site-header {
+      height: 160px;
+      display: grid;
+      grid-template-rows: 28px 80px 52px;
+      background: #fff;
+      border-bottom: none;
+    }
+
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    .eco-bar {
+      background: #F5F5F5;
+      border-bottom: 1px solid #E0E0E0;
+      height: 28px;
+    }
+    .eco-bar-row {
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #888;
+    }
+    .eco-bar a { color: #888; text-decoration: none; margin-right: 14px; }
+
+    .main-header {
+      background: #fff;
+      border-bottom: 1px solid #fff;
+      height: 80px;
+      display: flex;
+      align-items: center;
+    }
+    .main-header-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      height: 80px;
+      padding: 0;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-self: start;
+    }
+    .logo-banco-wrap, .logo-cmr-wrap {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      line-height: 0;
+    }
+    .logo-banco, .logo-cmr {
+      display: block;
+    }
+    .logo-banco { height: 36px; width: auto; }
+    .logo-cmr { height: 30px; width: auto; }
+    .header-greeting {
+      font-size: 16px;
+      white-space: nowrap;
+    }
+    .header-greeting .hola { color: #888; font-weight: 400; }
+    .header-greeting .name { color: #000; font-weight: 700; }
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      justify-self: center;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-self: end;
+    }
+
+    /* CMR puntos badge — pill blanco con borde */
+    .badge-puntos {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid #BDBDBD;
+      border-radius: 24px;
+      padding: 4px 12px 4px 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge-puntos .v-icon {
+      width: 26px;
+      height: 26px;
+      background: #333;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .badge-puntos .v-icon svg { width: 14px; height: 14px; }
+    .badge-puntos .pts-num {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      line-height: 1;
+    }
+    .badge-puntos .pts-label {
+      font-size: 9px;
+      color: #555;
+      line-height: 1.15;
+      text-align: left;
+    }
+    .badge-puntos .pts-chevron {
+      font-size: 14px;
+      color: #888;
+      margin-left: 2px;
+    }
+
+    .btn-settings {
+      background: #E0E0E0;
+      border: 1px solid #BDBDBD;
+      border-radius: 4px;
+      width: 44px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      cursor: pointer;
+      color: #555;
+      padding: 0 6px;
+    }
+    .btn-settings svg { width: 16px; height: 16px; }
+    .btn-settings .chev { font-size: 8px; color: #888; }
+
+    .btn-ayuda {
+      background: #555;
+      border: 1px solid #555;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 0 12px;
+      height: 34px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .btn-ayuda svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .btn-exit {
+      background: #333;
+      border: 1px solid #333;
+      color: #fff;
+      width: 38px;
+      height: 34px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .btn-exit svg { width: 18px; height: 18px; }
+
+    /* Nav bar — mismo ancho que header-inner */
+    .nav-section {
+      background: #fff;
+      height: 52px;
+      padding: 4px 0 8px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+    }
+    .nav-bar {
+      background: #333;
+      color: #fff;
+      height: 40px;
+      padding: 0 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      border-radius: 4px;
+      width: 100%;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #fff;
+      text-decoration: none;
+      padding: 0 8px;
+      height: 40px;
+      cursor: pointer;
+      white-space: nowrap;
+      border: none;
+      background: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .nav-item .nav-icon-sm {
+      width: 16px;
+      height: 16px;
+    }
+    .nav-sep {
+      width: 1px;
+      height: 22px;
+      background: #888;
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+    .nav-home { padding-left: 12px; }
+
+    .btn-outline {
+      background: #fff;
+      border: 1px solid #333;
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: #333;
+      border: 1px solid #333;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary-lg {
+      font-size: 14px;
+      padding: 10px 28px;
+    }
+
+    /* ── Content ── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 24px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #888;
+      font-weight: 600;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .card-box {
+      background: #fff;
+      border: 1px solid #E0E0E0;
+      border-radius: 4px;
+    }
+
+    /* ── Product rows ── */
+    .product-row,
+    .sub-row {
+      display: flex;
+      align-items: center;
+      padding: 18px 22px;
+      box-sizing: border-box;
+      min-height: 76px;
+    }
+    .product-row.clickable { cursor: pointer; }
+    .product-row.clickable:hover { background: #FAFAFA; }
+    .col-name { width: 220px; flex-shrink: 0; }
+    .col-name .title { font-size: 14px; font-weight: 700; }
+    .col-name .sub { font-size: 12px; color: #888; margin-top: 2px; }
+    .col-data { flex: 1; }
+    .col-data .label { font-size: 11px; color: #555; }
+    .col-data .amount-lg { font-size: 22px; font-weight: 700; line-height: 1.2; }
+    .col-data .amount-md { font-size: 16px; color: #555; font-weight: 600; }
+    .col-data .secondary { font-size: 12px; color: #888; margin-top: 2px; }
+    .col-data .inline-data { font-size: 12px; color: #555; }
+    .col-data .inline-data span { margin-right: 6px; }
+    .col-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      width: 344px;
+      justify-content: flex-end;
+    }
+    .col-actions .btn-outline,
+    .col-actions .btn-primary {
+      width: 168px;
+      height: 36px;
+      padding: 0 10px;
+      font-size: 11px;
+      line-height: 1.2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .row-sep { height: 1px; background: #E0E0E0; }
+
+    .credit-divider {
+      background: #F5F5F5;
+      border-top: 1px solid #E0E0E0;
+      border-bottom: 1px solid #E0E0E0;
+      padding: 8px 22px;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: #888;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .sub-row {
+      background: #FAFAFA;
+    }
+    .sub-row .col-name .title { font-size: 13px; font-weight: 400; color: #555; }
+
+    /* ── Carousel ── */
+    .carousel-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .carousel-arrow {
+      background: #fff;
+      border: 1px solid #BDBDBD;
+      color: #333;
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 18px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      flex: 1;
+    }
+    .offer-card {
+      flex: 1;
+      border: 1px solid #E0E0E0;
+      border-radius: 4px;
+      padding: 16px;
+      display: flex;
+      gap: 14px;
+      background: #fff;
+    }
+    .offer-img {
+      width: 90px;
+      height: 80px;
+      background: #E0E0E0;
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #888;
+      font-weight: 700;
+    }
+    .offer-body { flex: 1; }
+    .offer-title { font-size: 15px; font-weight: 700; color: #333; line-height: 1.3; margin-bottom: 4px; }
+    .offer-sub { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .offer-desc { font-size: 13px; color: #555; }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid #333;
+      background: #fff;
+    }
+    .dot.active { background: #333; }
+
+    /* ── Page title ── */
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .page-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .page-header-row .page-title { margin-bottom: 0; }
+    .page-header-actions { display: flex; gap: 10px; align-items: center; }
+    .page-header-actions .btn-outline,
+    .page-header-actions .btn-primary {
+      height: 40px;
+      padding: 0 28px;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    /* ── Balance card ── */
+    .balance-card {
+      background: #fff;
+      border: 1px solid #E0E0E0;
+      border-radius: 4px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .balance-card .label { font-size: 12px; color: #555; }
+    .balance-card .amount-hero { font-size: 38px; font-weight: 700; margin: 4px 0 16px; }
+    .balance-sep { height: 1px; background: #E0E0E0; margin-bottom: 14px; }
+    .balance-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #555;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ── Cupo card ── */
+    .cupo-card {
+      background: #fff;
+      border: 1px solid #E0E0E0;
+      border-radius: 4px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .cupo-top {
+      display: flex;
+      gap: 60px;
+      margin-bottom: 20px;
+    }
+    .cupo-block .label { font-size: 12px; color: #555; }
+    .cupo-block .amount { font-size: 34px; font-weight: 700; margin-top: 4px; }
+    .cupo-block .amount.used { color: #555; font-weight: 700; }
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #E0E0E0;
+      border: 1px solid #BDBDBD;
+      border-radius: 4px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+    .progress-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 15%;
+      background: #555;
+      border-radius: 3px;
+    }
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 16px;
+    }
+    .cupo-meta {
+      font-size: 13px;
+      color: #555;
+      padding-top: 16px;
+      border-top: 1px solid #E0E0E0;
+    }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #BDBDBD;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 10px 18px;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+    }
+    .tab.active {
+      color: #000;
+      font-weight: 700;
+      border-bottom-color: #000;
+    }
+
+    /* ── Filters ── */
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .filter-row select {
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 6px 32px 6px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 10px 6px;
+      min-width: 200px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+    .filter-note {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    /* ── Tables ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    .data-table thead th {
+      background: #333;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    .data-table thead th.right { text-align: right; }
+    .data-table tbody td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #E0E0E0;
+    }
+    .data-table tbody tr:nth-child(even) { background: #F5F5F5; }
+    .data-table tbody tr:nth-child(odd) { background: #fff; }
+    .data-table .right { text-align: right; }
+    .data-table .bold { font-weight: 700; }
+    .data-table .pending { color: #888; font-size: 12px; }
+
+    .table-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+    .table-footer-split {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .pagination button {
+      background: #fff;
+      border: 1px solid #333;
+      border-radius: 4px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      background: #333;
+      color: #BDBDBD;
+      padding: 16px 32px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .page-footer .logo-placeholder {
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    /* ── Annotations ── */
+    .annot-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 999;
+    }
+    .annot-target { position: relative; }
+    .annot-label {
+      display: none;
+      position: absolute;
+      background: #F5F5F5;
+      border: 1px dashed #333;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 4px;
+      z-index: 50;
+      max-width: 260px;
+      line-height: 1.4;
+      pointer-events: none;
+    }
+    body.show-annotations .annot-label { display: block; }
+
+    .annot-1 .annot-label { top: -8px; left: 0; transform: translateY(-100%); }
+    .annot-2 .annot-label { top: 50%; right: -12px; transform: translate(100%, -50%); }
+    .annot-3 .annot-label { top: 50%; right: -12px; transform: translate(100%, -50%); }
+    .annot-4 .annot-label { top: -8px; left: 22px; transform: translateY(-100%); }
+    .annot-5 .annot-label { top: -8px; left: 0; transform: translateY(-100%); }
+    .annot-6 .annot-label { top: -8px; left: 0; transform: translateY(-100%); }
+
+    .mt-28 { margin-top: 28px; }
+  </style>
+</head>
+<body>
+
+<!-- Presentation bar -->
+<div class="pres-bar">
+  <button class="active" data-screen="screen-home">1. Home</button>
+  <button data-screen="screen-cuenta">2. Cuenta Corriente</button>
+  <button data-screen="screen-cmr">3. CMR Elite</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- SCREEN 1: HOME                                              -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div id="screen-home" class="screen active">
+
+  <div class="global-header-slot"></div>
+
+  <div class="container">
+
+    <!-- MIS PRODUCTOS (CAMBIO 1: primero) -->
+    <div class="annot-target annot-1">
+      <div class="section-label">MIS PRODUCTOS</div>
+      <span class="annot-label">CAMBIO 1: Mis Productos sube — antes aparecía después del carrusel</span>
+    </div>
+
+    <div class="card-box">
+
+      <!-- Cuenta Corriente -->
+      <div class="product-row clickable annot-target annot-2" data-screen="screen-cuenta">
+        <div class="col-name">
+          <div class="title">Cuenta Corriente ›</div>
+          <div class="sub">1 981 316164 0</div>
+        </div>
+        <div class="col-data">
+          <div class="label">Tienes disponible</div>
+          <div class="amount-lg">$ 48.250</div>
+        </div>
+        <div class="col-actions">
+          <button class="btn-outline" onclick="event.stopPropagation()">Transf. entre cuentas</button>
+          <button class="btn-primary" onclick="event.stopPropagation()">Transferir a terceros</button>
+        </div>
+        <span class="annot-label">CAMBIO 2: Un solo número principal, saldo contable al detalle</span>
+      </div>
+
+      <div class="row-sep"></div>
+
+      <!-- Línea de Crédito -->
+      <div class="product-row">
+        <div class="col-name">
+          <div class="title">Línea de Crédito ›</div>
+          <div class="sub">2 981 316164 5</div>
+        </div>
+        <div class="col-data">
+          <div class="label">Tienes disponible</div>
+          <div class="amount-lg">$ 1.850.000</div>
+        </div>
+        <div class="col-actions">
+          <button class="btn-outline">Aumentar mi línea</button>
+          <button class="btn-primary">Pagar / Configurar</button>
+        </div>
+      </div>
+
+      <div class="row-sep"></div>
+
+      <!-- CMR Mastercard Elite -->
+      <div class="product-row clickable annot-target annot-3" data-screen="screen-cmr">
+        <div class="col-name">
+          <div class="title">CMR Mastercard Elite ›</div>
+          <div class="sub">•••• 0765</div>
+        </div>
+        <div class="col-data">
+          <div class="label">Has utilizado</div>
+          <div class="amount-lg">$ 1.245.600</div>
+          <div class="secondary">Disponible: $7.254.400 de $8.500.000</div>
+        </div>
+        <div class="col-actions">
+          <button class="btn-outline" onclick="event.stopPropagation()">Estado de cuenta</button>
+          <button class="btn-primary" onclick="event.stopPropagation()">Pagar</button>
+        </div>
+        <span class="annot-label">CAMBIO 3: Monto utilizado como dato protagonista</span>
+      </div>
+
+      <!-- CAMBIO 4: Divisor crédito -->
+      <div class="credit-divider annot-target annot-4">
+        CRÉDITO DISPONIBLE PARA TI
+        <span class="annot-label">CAMBIO 4: Avance y Súper Avance separados del saldo propio</span>
+      </div>
+
+      <!-- Avance -->
+      <div class="sub-row">
+        <div class="col-name">
+          <div class="title">Avance</div>
+        </div>
+        <div class="col-data">
+          <div class="label" style="color:#888">Monto disponible</div>
+          <div class="amount-md">$ 7.254.400</div>
+        </div>
+        <div class="col-actions">
+          <button class="btn-outline">Simular / Transferir</button>
+        </div>
+      </div>
+
+      <div class="row-sep"></div>
+
+      <!-- Súper Avance -->
+      <div class="sub-row">
+        <div class="col-name">
+          <div class="title">Súper Avance</div>
+        </div>
+        <div class="col-data">
+          <div class="label" style="color:#888">Monto disponible</div>
+          <div class="amount-md">$ 40.000.000</div>
+        </div>
+        <div class="col-actions">
+          <button class="btn-outline">Aumentar mi cupo</button>
+          <button class="btn-outline">Simular / Transferir</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MIS OFERTAS (CAMBIO 1: segundo) -->
+    <div class="mt-28 annot-target annot-5">
+      <div class="section-label">MIS OFERTAS</div>
+      <span class="annot-label">SIN CAMBIO DE COMPONENTE: mismo carrusel, nueva posición</span>
+    </div>
+
+    <div class="carousel-wrap">
+      <button class="carousel-arrow">‹</button>
+      <div class="carousel-track">
+        <div class="offer-card">
+          <div class="offer-img">X</div>
+          <div class="offer-body">
+            <div class="offer-title">¡Tu Avance te salva!</div>
+            <div class="offer-sub">Simula aquí</div>
+            <div class="offer-desc">Tienes disponible hasta $7.254.400</div>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="offer-img">X</div>
+          <div class="offer-body">
+            <div class="offer-title">Tienes un Crédito Disponible</div>
+            <div class="offer-sub">Crédito de Consumo</div>
+            <div class="offer-desc">Aprovecha tu preaprobado de $40.000.000</div>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="offer-img">X</div>
+          <div class="offer-body">
+            <div class="offer-title">Aprovecha descuentos sin tope todos los días</div>
+            <div class="offer-sub">Hasta 40% dcto</div>
+            <div class="offer-desc">En restaurantes, farmacia, cine, y mucho más</div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-arrow">›</button>
+    </div>
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span class="logo-placeholder">[LOGO BF]</span>
+    <span>© Banco Falabella 2026. Todos los derechos reservados. Infórmese sobre la garantía estatal de los depósitos en su banco o en www.cmfchile.cl</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- SCREEN 2: CUENTA CORRIENTE                                  -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div id="screen-cuenta" class="screen">
+
+  <div class="global-header-slot"></div>
+
+  <div class="container">
+
+    <div class="page-title">Cuenta Corriente — 1-981-316164-0</div>
+
+    <!-- Balance card -->
+    <div class="balance-card">
+      <div class="label">Saldo disponible</div>
+      <div class="amount-hero">$ 48.250</div>
+      <div class="balance-sep"></div>
+      <div class="balance-meta">
+        <span>Saldo contable &nbsp;$48.250 &nbsp;&nbsp;|&nbsp;&nbsp; Retenciones 24H &nbsp;$0 &nbsp;&nbsp;|&nbsp;&nbsp; Retenciones 48H &nbsp;$0</span>
+        <span>Saldo disponible Línea de Crédito &nbsp;$1.850.000</span>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active">Listado de Movimientos</div>
+      <div class="tab">Cartolas</div>
+      <div class="tab">Cheques y Talonarios</div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-row">
+      <span>Buscar por:</span>
+      <select><option>Últimos movimientos</option></select>
+    </div>
+    <div class="filter-note">
+      Toda transacción realizada en día hábil con posterioridad a las 14:00 horas o en día inhábil, quedará registrada con la fecha contable, es decir, el día hábil siguiente.
+    </div>
+
+    <!-- Table -->
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Descripción</th>
+          <th class="right">Cargo</th>
+          <th class="right">Abono</th>
+          <th class="right">Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>15-06-2026</td><td>Transf. a terceros</td><td class="right">$182.499</td><td class="right"></td><td class="right bold">$48.250</td></tr>
+        <tr><td>15-06-2026</td><td>Transf. a terceros</td><td class="right">$35.000</td><td class="right"></td><td class="right bold">$230.749</td></tr>
+        <tr><td>12-06-2026</td><td>Transf. a terceros</td><td class="right">$4.200</td><td class="right"></td><td class="right bold">$265.749</td></tr>
+        <tr><td>03-06-2026</td><td>Aporte FM WEB – FONDO MUTUO</td><td class="right">$7.500</td><td class="right"></td><td class="right bold">$269.949</td></tr>
+        <tr><td>02-06-2026</td><td>Transf. recibida</td><td class="right"></td><td class="right">$45.000</td><td class="right bold">$277.449</td></tr>
+        <tr><td>01-06-2026</td><td>Transf. recibida</td><td class="right"></td><td class="right">$80.000</td><td class="right bold">$232.449</td></tr>
+        <tr><td>29-05-2026</td><td>Pago tarjeta crédito</td><td class="right">$2.050.000</td><td class="right"></td><td class="right bold">$152.449</td></tr>
+        <tr><td>29-05-2026</td><td>Transf. recibida</td><td class="right"></td><td class="right">$2.100.000</td><td class="right bold">$2.202.449</td></tr>
+        <tr><td>26-05-2026</td><td>Pago tarjeta crédito</td><td class="right">$47.551</td><td class="right"></td><td class="right bold">$102.449</td></tr>
+        <tr><td>26-05-2026</td><td>Transf. recibida</td><td class="right"></td><td class="right">$150.000</td><td class="right bold">$150.000</td></tr>
+      </tbody>
+    </table>
+
+    <div class="table-footer">
+      <button class="btn-outline">Imprimir</button>
+      <button class="btn-outline">Exportar a Excel</button>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span class="logo-placeholder">[LOGO BF]</span>
+    <span>© Banco Falabella 2026. Todos los derechos reservados. Infórmese sobre la garantía estatal de los depósitos en su banco o en www.cmfchile.cl</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- SCREEN 3: CMR ELITE                                         -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div id="screen-cmr" class="screen">
+
+  <div class="global-header-slot"></div>
+
+  <div class="container">
+
+    <div class="page-header-row">
+      <div class="page-title">CMR Elite * * * * 0765</div>
+      <div class="page-header-actions">
+        <button class="btn-outline">••• Más opciones</button>
+        <button class="btn-primary btn-primary-lg">Pagar</button>
+      </div>
+    </div>
+
+    <!-- NUEVO: Tarjeta Cupo -->
+    <div class="cupo-card annot-target annot-6">
+      <div class="cupo-top">
+        <div class="cupo-block">
+          <div class="label">Cupo utilizado</div>
+          <div class="amount used">$ 1.245.600</div>
+        </div>
+        <div class="cupo-block">
+          <div class="label">Cupo disponible</div>
+          <div class="amount">$ 7.254.400</div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <div class="progress-labels">
+        <span>$0</span>
+        <span>Cupo total: $8.500.000</span>
+      </div>
+      <div class="cupo-meta">
+        Próxima facturación &nbsp;19/06/2026 &nbsp;&nbsp;|&nbsp;&nbsp;
+        Próximo vencimiento &nbsp;05/07/2026 &nbsp;&nbsp;|&nbsp;&nbsp;
+        Gastos del período &nbsp;$892.450
+      </div>
+      <span class="annot-label">NUEVO: Este bloque no existe hoy — el detalle CMR actual no muestra el cupo disponible en ningún lado</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active">Últimos movimientos</div>
+      <div class="tab">Movimientos facturados</div>
+      <div class="tab">Estados de Cuenta CMR</div>
+      <div class="tab">Próximos Vencimientos</div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-row">
+      <span>Mostrar Titular / Adicional:</span>
+      <select><option>Todos</option></select>
+    </div>
+    <div class="filter-note">
+      *Cada página muestra hasta 20 transacciones. Para ver más, cambia de página en la parte inferior.
+    </div>
+
+    <!-- Table -->
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Estado / Fecha</th>
+          <th>Descripción</th>
+          <th>Persona</th>
+          <th class="right">Monto total</th>
+          <th>Cuotas</th>
+          <th class="right">Cuota a pagar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="pending">[⏱] Pendiente</td><td>COMPRA TIENDA ONLINE</td><td>Titular</td><td class="right">$12.990</td><td>01/01</td><td class="right">$12.990</td></tr>
+        <tr><td class="pending">[⏱] Pendiente</td><td>COMPRA RETAIL HOGAR</td><td>Titular</td><td class="right">$94.500</td><td>01/01</td><td class="right">$94.500</td></tr>
+        <tr><td class="pending">[⏱] Pendiente</td><td>COMPRA RESTAURANTE CENTRO</td><td>Titular</td><td class="right">$31.200</td><td>01/01</td><td class="right">$31.200</td></tr>
+        <tr><td class="pending">[⏱] Pendiente</td><td>COMPRA ESTACIONAMIENTO</td><td>Titular</td><td class="right">$4.800</td><td>01/01</td><td class="right">$4.800</td></tr>
+        <tr><td>13-06-2026</td><td>COMPRA ESTACIÓN SERVICIO</td><td>Titular</td><td class="right">$68.400</td><td>01/01</td><td class="right">$68.400</td></tr>
+        <tr><td>13-06-2026</td><td>COMPRA DELIVERY COMIDA</td><td>Titular</td><td class="right">$9.850</td><td>01/01</td><td class="right">$9.850</td></tr>
+        <tr><td>12-06-2026</td><td>COMPRA MASCOTAS</td><td>Titular</td><td class="right">$14.200</td><td>01/01</td><td class="right">$14.200</td></tr>
+        <tr><td>12-06-2026</td><td>COMPRA RESTAURANTE</td><td>Titular</td><td class="right">$11.600</td><td>01/01</td><td class="right">$11.600</td></tr>
+        <tr><td>12-06-2026</td><td>COMPRA TRANSPORTE APP</td><td>Titular</td><td class="right">$4.990</td><td>01/01</td><td class="right">$4.990</td></tr>
+        <tr><td>11-06-2026</td><td>COMPRA MARKETPLACE</td><td>Adicional</td><td class="right">$22.500</td><td>01/01</td><td class="right">$22.500</td></tr>
+      </tbody>
+    </table>
+
+    <div class="table-footer-split">
+      <div></div>
+      <div class="pagination">
+        <button>‹</button>
+        <span>Página 1</span>
+        <button>›</button>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn-outline">Exportar a Excel</button>
+        <button class="btn-outline">Imprimir</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span class="logo-placeholder">[LOGO BF]</span>
+    <span>© Banco Falabella 2026. Todos los derechos reservados. Infórmese sobre la garantía estatal de los depósitos en su banco o en www.cmfchile.cl</span>
+  </div>
+</div>
+
+<!-- Global header template -->
+<template id="tpl-header">
+  <header class="site-header">
+    <div class="eco-bar">
+      <div class="header-inner eco-bar-row">
+        <div>
+          <a href="#">Seguros</a><a href="#">Viajes</a><a href="#">Falabella</a>
+          <a href="#">Sodimac</a><a href="#">Tottus</a><a href="#">Homy</a><a href="#">Linio</a>
+        </div>
+        <div>Última conexión en la web • 15/06/26 a las 5:31 PM</div>
+      </div>
+    </div>
+
+    <div class="main-header">
+      <div class="header-inner main-header-row">
+        <div class="header-left">
+          <div class="logo-banco-wrap">
+            <img src="assets/logo-banco-falabella-bw.png" alt="Banco Falabella" class="logo-banco">
+          </div>
+          <div class="logo-cmr-wrap">
+            <img src="assets/logo-cmr-bw.png" alt="CMR Falabella" class="logo-cmr">
+          </div>
+        </div>
+        <div class="header-center">
+          <div class="header-greeting"><span class="hola">Hola </span><span class="name">Vicente</span></div>
+          <div class="badge-puntos">
+            <div class="v-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 4L4 18h16L12 4z" fill="#fff"/></svg>
+            </div>
+            <span class="pts-num">7.070</span>
+            <span class="pts-label">CMR<br>puntos</span>
+            <span class="pts-chevron">›</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="btn-settings" aria-label="Configuración">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <span class="chev">▼</span>
+          </button>
+          <button class="btn-ayuda">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12a8 8 0 0116 0v2a2 2 0 01-2 2h-1.5l-1.5 2.5-1.5-2.5H6a2 2 0 01-2-2v-2z"/><path d="M10 18.5a2 2 0 004 0"/></svg>
+            Ayuda y contacto
+          </button>
+          <button class="btn-exit" aria-label="Salir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 3h4a1 1 0 011 1v16a1 1 0 01-1 1h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="header-inner">
+        <nav class="nav-bar">
+      <button class="nav-item nav-home" data-screen="screen-home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-7H9v7H4a1 1 0 01-1-1v-9.5z"/></svg>
+      </button>
+      <span class="nav-sep"></span>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="6.5"/><path d="M12 9.5v5M10.5 11.5c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5c0 .8-.7 1.5-1.5 1.5H12"/><path d="M4.5 10.5C3 9 2.5 7 3 5M19.5 10.5C21 9 21.5 7 21 5M4.5 13.5C3 15 2.5 17 3 19M19.5 13.5C21 15 21.5 17 21 19"/></svg>
+        Transferir
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="13" rx="1.5"/><line x1="7" y1="21" x2="17" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/><rect x="8" y="9" width="8" height="5" rx="0.5" stroke-width="1.2"/></svg>
+        Pagar o recargar
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3h2l1.5 4h5.5c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h1"/><path d="M6 9h12"/><circle cx="17" cy="18" r="1.2" fill="currentColor"/></svg>
+        Avances y Créditos
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 20v-5h8v5"/><path d="M6 15h12"/><path d="M12 15V9"/><path d="M9.5 9c0-1.7 1.1-3 2.5-3s2.5 1.3 2.5 3"/><path d="M9 20h6"/><line x1="10" y1="9" x2="8" y2="7"/><line x1="14" y1="9" x2="16" y2="7"/></svg>
+        Inversiones
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-3.5 0-6 2.5-6 5.5v1H5a1 1 0 00-1 1v1.5h16V10.5a1 1 0 00-1-1h-1V8.5C18 5.5 15.5 3 12 3z"/><path d="M4 12.5v1.5a8 8 0 0016 0v-1.5"/><line x1="12" y1="14" x2="12" y2="21"/></svg>
+        Seguros
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="12" rx="2"/><line x1="2" y1="12" x2="22" y2="12"/><circle cx="18" cy="16" r="2.5" fill="currentColor" stroke="currentColor"/><line x1="18" y1="14.5" x2="18" y2="17.5" stroke="#333" stroke-width="1.2"/><line x1="16.5" y1="16" x2="19.5" y2="16" stroke="#333" stroke-width="1.2"/></svg>
+        Solicitar o portar productos
+      </button>
+      <button class="nav-item">
+        <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="8.5"/><text x="12" y="10.5" text-anchor="middle" fill="currentColor" stroke="none" font-size="5" font-weight="800" font-family="Inter,sans-serif">cmr</text><text x="12" y="15" text-anchor="middle" fill="currentColor" stroke="none" font-size="3.8" font-family="Inter,sans-serif">puntos</text></svg>
+        CMR Puntos
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M12 11V7"/><path d="M8.5 7h7"/><path d="M8.5 7c0-2 1.6-3.5 3.5-3.5S15.5 5 15.5 7"/><path d="M12 7V5"/><circle cx="12" cy="5" r="1.5"/></svg>
+        Descuentos
+      </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+</template>
+
+<!-- Annotations toggle -->
+<button class="annot-toggle" id="annotBtn">Mostrar cambios</button>
+
+<script>
+  /* Inject shared header into all screens */
+  const headerTpl = document.getElementById('tpl-header');
+  document.querySelectorAll('.global-header-slot').forEach(slot => {
+    slot.appendChild(headerTpl.content.cloneNode(true));
+  });
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.pres-bar button').forEach(b => {
+      b.classList.toggle('active', b.dataset.screen === id);
+    });
+    window.scrollTo(0, 0);
+  }
+
+  document.addEventListener('click', e => {
+    const nav = e.target.closest('[data-screen]');
+    if (nav) showScreen(nav.dataset.screen);
+  });
+
+  document.getElementById('annotBtn').addEventListener('click', function () {
+    document.body.classList.toggle('show-annotations');
+    this.textContent = document.body.classList.contains('show-annotations')
+      ? 'Ocultar cambios'
+      : 'Mostrar cambios';
+  });
+</script>
+
+</body>
+</html>
